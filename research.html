@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Research Explorer · Weijia Cao</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.research-controls {display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+.research-map {width:min(100%, 26rem);height:auto;border:1px solid #8fa5ae}
+.research-table {border-collapse:collapse;margin:1rem 0}
+.research-table th,.research-table td {padding:.5rem;text-align:left;border-bottom:1px solid #8fa5ae}
+</style>
+<script defer src="site-analytics.js"></script>
+<script defer src="research-explorer.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="index.html">Weijia Cao</a><nav><a href="publications.html">Publications</a><a href="projects.html">Code</a><a href="research.html" class="on">Research</a></nav></div></header>
+<main class="wrap">
+<h1>Research Explorer</h1>
+<h2>What happens when a map is out of date?</h2>
+<p>This synthetic grid illustrates how updating a map can change a planned route. It is a teaching demo with deterministic inputs.</p>
+<div class="research-controls">
+<label>Scenario <select id="scenario"><option value="current">Current map</option><option value="stale" selected>Outdated map</option></select></label>
+<label>Route shown <select id="route"><option value="prior">Prior map only</option><option value="updated" selected>Map after observation</option></select></label>
+</div>
+<p>Dark gray: known obstacle. Orange: newly observed obstacle. Blue: planned route. S/G: start/goal.</p>
+<canvas id="grid" class="research-map" width="400" height="400" role="img" aria-label="Grid with obstacles and the selected route"></canvas>
+<table class="research-table"><thead><tr><th scope="col">Planner input</th><th scope="col">Planned moves</th><th scope="col">Route clear in the actual grid?</th></tr></thead><tbody id="results"></tbody></table>
+<p id="status" aria-live="polite"></p>
+<details><summary>Simulation protocol</summary><p>Both planners use breadth-first search on an 8 × 8 grid with four-directional movement and unit cost. The updated planner receives one newly observed obstacle when the map is outdated. Route clearance is checked against the actual grid. The comparison covers map updates only.</p></details>
+<noscript><p>Enable JavaScript to run the grid simulation.</p></noscript>
+</main>
+</body></html>
